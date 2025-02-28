@@ -1,5 +1,6 @@
 package com.sandhya.spring_security.domain.entity;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -10,28 +11,28 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "item")
+@Table(name = "user_info")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Item {
+public class UserInfo {
 
     @Id
     @GeneratedValue
     private UUID id;
 
-    private String itemName;
+    private String userName;
 
-    private Date createdDateTime;
+    private String password;
 
-    private Date lastModifiedDateTime;
+    private String emailId;
 
-    private String lastModifiedUser;
+    private String roles;
 
 }
