@@ -8,7 +8,7 @@ import lombok.Data;
 public class SkuCreateRequest {
 
     private String name;
-    private String itemId;
+    private Item item;
     private String lastModifiedUser;
 
 }

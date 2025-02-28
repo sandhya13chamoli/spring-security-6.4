@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/skus")
 public class SkuController {
@@ -32,12 +34,20 @@ public class SkuController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "{id}")
+    @PreAuthorize(value = "hasAuthority('ROLE_USER')")
     public ResponseEntity<Sku> getSkuById(@PathVariable String id) {
         return new ResponseEntity<>(iSkuService.getSkuById(id), HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.GET)
+    @PreAuthorize(value = "hasAuthority('ROLE_ADMIN')")
+    public ResponseEntity<List<Sku>> getAllSku() {
+        return new ResponseEntity<>(iSkuService.getAllSku(), HttpStatus.OK);
+    }
 
+
+    @RequestMapping(method = RequestMethod.POST)
+    @PreAuthorize(value = "hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<Sku> createSku(@RequestBody SkuCreateRequest skuCreateRequest) {
         Sku sku = skuMapper.mapSkuCreateRequest(skuCreateRequest);
         return new ResponseEntity<>(iSkuService.createSku(sku), HttpStatus.CREATED);

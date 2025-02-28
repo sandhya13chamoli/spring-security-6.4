@@ -3,6 +3,7 @@ package com.sandhya.spring_security.configuration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -16,6 +17,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 public class SecurityConfig {
 
     //Authentication with Spring Security
@@ -23,12 +25,12 @@ public class SecurityConfig {
     public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
         UserDetails userDetails1 = User
                 .withUsername("sachamo")
-                .password(passwordEncoder.encode("strongPassword123@"))
+                .password(passwordEncoder.encode("pwd"))
                 .roles("ADMIN", "USER")
                 .build();
         UserDetails userDetails2 = User
-                .withUsername("sachamol")
-                .password(passwordEncoder.encode("strongPassword123@"))
+                .withUsername("john")
+                .password(passwordEncoder.encode("pwd"))
                 .roles("USER")
                 .build();
         return new InMemoryUserDetailsManager(userDetails1, userDetails2);
